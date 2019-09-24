@@ -1,4 +1,4 @@
-package com.yangbaobao.administrationtools;
+package com.yangbaobao.administrationtools.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
