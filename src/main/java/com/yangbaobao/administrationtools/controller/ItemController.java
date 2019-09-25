@@ -1,14 +1,13 @@
 package com.yangbaobao.administrationtools.controller;
 
 import com.yangbaobao.administrationtools.entities.Item;
-import com.yangbaobao.administrationtools.javabeans.Response;
 import com.yangbaobao.administrationtools.repositories.ItemRepository;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import static com.yangbaobao.administrationtools.utils.ResponseUtils.*;
 
 import java.util.*;
 
@@ -58,13 +57,6 @@ public class ItemController {
         return generateResponse(items);
     }
 
-    private String generateResponse(List<Item> item) {
-        Response response = new Response();
-        response.setStatusCode(200);
-        response.setMessage("success");
-        response.setTotal(item.size());
-        response.setData(item);
-        return new JSONObject(response).toString();
-    }
+
 }
 
