@@ -15,4 +15,11 @@ public class ResponseUtils {
         response.setData(data);
         return new JSONObject(response).toString();
     }
+
+    public static String generateNonDataSuccessResponse() {
+        Response response = new Response();
+        response.setStatusCode(200);
+        response.setMessage("success");
+        return new JSONObject(response).toString();
+    }
 }

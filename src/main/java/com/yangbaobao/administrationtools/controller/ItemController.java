@@ -2,11 +2,10 @@ package com.yangbaobao.administrationtools.controller;
 
 import com.yangbaobao.administrationtools.entities.Item;
 import com.yangbaobao.administrationtools.repositories.ItemRepository;
+import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import static com.yangbaobao.administrationtools.utils.ResponseUtils.*;
 
 import java.util.*;
@@ -56,6 +55,35 @@ public class ItemController {
         List<Item> items = itemRepository.findAllByCategoryContains(category);
         return generateResponse(items);
     }
+
+    @ResponseBody
+    @GetMapping("/admin/deleteItem/{id}")
+    public String deleteItemById(@PathVariable(name = "id") Integer id) {
+        itemRepository.deleteById(id);
+        return generateNonDataSuccessResponse();
+    }
+
+    @ResponseBody
+    @GetMapping("/admin/{id}/updateStatus")
+    public String updateItemStatusById(@PathVariable(name = "id") Integer id, @RequestParam("status") Integer status) {
+        itemRepository.updateItemStatusById(status, id);
+        List<Item> items = itemRepository.findAllById(id);
+        return generateResponse(items);
+    }
+
+    //TODO: current 403
+    @PostMapping("/admin/save")
+    public String saveItem(Item item) {
+        itemRepository.saveAndFlush(item);
+        return generateNonDataSuccessResponse();
+    }
+
+
+
+
+
+
+
 
 
 }
